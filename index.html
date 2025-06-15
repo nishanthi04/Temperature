@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temperature Converter</title>
+  <style>
+    body {
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000000; /* fallback color */
+  font-family: "Georgia", Helvetica;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+
+    .converter-container {
+      background-color: rgb(238, 225, 225);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      transform: translateX(-70px);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-section {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      color: #754e4e;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+  margin-top: 15px;
+  margin-bottom: 1rem;
+}
+
+label[for="result"] {
+  margin-top: 0.75rem;
+  margin-bottom: 0.15rem;
+  display: block;
+}
+
+  </style>
+</head>
+<body>
+  <div class="converter-container">
+    <h1>TEMPERATURE CONVERTER</h1>
+    
+    <div class="input-section">
+      <label for="degree">Degrees</label>
+      <input type="number" id="degree" placeholder="Enter temperature" />
+    </div>
+
+    <div class="input-section">
+      <label for="type">Type</label>
+      <select id="type">
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="celsius">Celsius</option>
+        <option value="kelvin">Kelvin</option>
+      </select>
+    </div>
+<button onclick="convertTemp()">Convert</button> 
+    <div class="input-section">
+      <label for="result">Result</label>
+      <input type="text" id="result" readonly />
+    </div>
+
+
+  </div>
+
+  <script>
+    function convertTemp() {
+      const degree = parseFloat(document.getElementById("degree").value);
+      const type = document.getElementById("type").value.toLowerCase();
+      const resultField = document.getElementById("result");
+
+      if (isNaN(degree)) {
+        resultField.value = "Please enter a valid number!";
+        return;
+      }
+
+      let result;
+
+      switch (type) {
+        case "fahrenheit":
+          result = ((degree - 32) * 5) / 9;
+          resultField.value = `${result.toFixed(4)} °C`;
+          break;
+
+        case "celsius":
+          result = (degree * 9) / 5 + 32;
+          resultField.value = `${result.toFixed(4)} °F`;
+          break;
+
+        case "kelvin":
+          result = degree - 273.15;
+          resultField.value = `${result.toFixed(4)} °C`;
+          break;
+
+        default:
+          resultField.value = "Invalid type selected.";
+      }
+    }
+  </script>
+</body>
+</html>
